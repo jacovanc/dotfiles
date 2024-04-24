@@ -9,8 +9,8 @@ software_packages=(
 )
 
 # Fetch repository for latest versions of neovim
-echo "Fetching repository..."
-sudo add-apt-repository ppa:neovim-ppa/unstable
+# echo "Fetching repository..."
+# sudo add-apt-repository ppa:neovim-ppa/unstable
 
 # Update package lists
 echo "Updating package lists..."
@@ -29,6 +29,7 @@ git clone https://github.com/neovim/neovim
 cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
 git checkout stable
 cd build && cpack -G DEB && sudo dpkg -i nvim-linux64.deb
+cd .. && rm -rf neovim
 
 echo "Software installation complete."
 
