@@ -22,14 +22,23 @@ for package in "${software_packages[@]}"; do
     sudo apt-get install -y $package
 done
 
-# Install neovim - build from source
-# We do this because ubuntu doesn't have neovim later than v0.6, and we need at least v0.8
-sudo apt-get install ninja-build gettext cmake unzip curl build-essential
-git clone https://github.com/neovim/neovim
-cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
-git checkout stable
-cd build && cpack -G DEB && sudo dpkg -i nvim-linux64.deb
-cd .. && rm -rf neovim
+# Download and extract Neovim binary release
+echo "Downloading Neovim binary release..."
+wget -O nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+
+echo "Extracting Neovim binary release..."
+sudo tar xzf nvim-linux64.tar.gz -C /usr/local/
+
+# Add Neovim binary directory to PATH
+echo "Adding Neovim binary directory to PATH..."
+echo 'export PATH="/usr/local/nvim-linux64/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+echo "Neovim installation complete."
+
+# Clean up downloaded files
+echo "Cleaning up..."
+rm nvim-linux64.tar.gz
 
 echo "Software installation complete."
 
