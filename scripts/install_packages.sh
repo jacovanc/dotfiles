@@ -29,11 +29,6 @@ wget -O nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/latest/dow
 echo "Extracting Neovim binary release..."
 sudo tar xzf nvim-linux64.tar.gz -C /usr/local/
 
-# Add Neovim binary directory to PATH
-echo "Adding Neovim binary directory to PATH..."
-echo 'export PATH="/usr/local/nvim-linux64/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
-
 echo "Neovim installation complete."
 
 # Clean up downloaded files
